@@ -1,0 +1,90 @@
+<Schema name="Mortalidad">
+  <Cube name="Mortalidad_Motivo" visible="true" cache="true" enabled="true">
+    <Table name="hechos_motivo" schema="public">
+    </Table>
+    <Dimension type="TimeDimension" visible="true" foreignKey="id_cuando" highCardinality="false" name="Cu&#225;ndo">
+      <Hierarchy name="Mensual" visible="true" hasAll="true" allMemberName="Todo Cu&#225;ndo Mensual" allLevelName="Todo" primaryKey="id_cuando">
+        <Table name="cuando" schema="public">
+        </Table>
+        <Level name="A&#241;o" visible="true" column="a&#241;o" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+        </Level>
+        <Level name="Mes" visible="true" column="mes" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+        </Level>
+        <Level name="Fecha" visible="true" column="fecha" type="Date" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="Semanal" visible="true" hasAll="true" allMemberName="Todo Cu&#225;ndo Semanal" allLevelName="Todo" primaryKey="id_cuando">
+        <Table name="cuando" schema="public">
+        </Table>
+        <Level name="A&#241;o" visible="true" column="a&#241;o" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+        </Level>
+        <Level name="Semana" visible="true" column="semana" type="Integer" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
+        </Level>
+        <Level name="Fecha" visible="true" column="fecha" type="Date" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_donde" highCardinality="false" name="D&#243;nde">
+      <Hierarchy name="Geogr&#225;fica" visible="true" hasAll="true" allMemberName="Todo D&#243;nde Geogr&#225;fica" allLevelName="Todo" primaryKey="id_donde">
+        <Table name="donde" schema="public">
+        </Table>
+        <Level name="Regi&#243;n" visible="true" column="region" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Estado" visible="true" column="estado" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Ciudad" visible="true" column="ciudad" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_motivo" highCardinality="false" name="Motivo">
+      <Hierarchy name="Motivo" visible="true" hasAll="true" allMemberName="Todo" allLevelName="Todo" primaryKey="id_motivo">
+        <Table name="motivo" schema="public">
+        </Table>
+        <Level name="Motivo" visible="true" column="motivo" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Muertes" column="muertes" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Mortalidad_Tramo" visible="true" cache="true" enabled="true">
+    <Table name="hechos_tramo" schema="public">
+    </Table>
+    <Dimension type="TimeDimension" visible="true" foreignKey="id_cuando" highCardinality="false" name="Cu&#225;ndo">
+      <Hierarchy name="Mensual" visible="true" hasAll="true" allMemberName="Todo Cuando Mensual" allLevelName="Todo" primaryKey="id_cuando">
+        <Table name="cuando" schema="public">
+        </Table>
+        <Level name="A&#241;o" visible="true" column="a&#241;o" type="Integer" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
+        </Level>
+        <Level name="Mes" visible="true" column="mes" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+        </Level>
+        <Level name="Fecha" visible="true" column="fecha" type="Date" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_tramo" highCardinality="false" name="Tramo">
+      <Hierarchy name="Rango Edad" visible="true" hasAll="true" allMemberName="Todo Rango Edad" allLevelName="Todo" primaryKey="id_tramo">
+        <Table name="tramo" schema="public">
+        </Table>
+        <Level name="Super Tramo" visible="true" column="super_tramo" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Tramo Edad" visible="true" column="tramo_edad" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_donde" highCardinality="false" name="D&#243;nde">
+      <Hierarchy name="Geogr&#225;fica" visible="true" hasAll="true" allMemberName="Todo D&#243;nde Geogr&#225;fica" allLevelName="Todo" primaryKey="id_donde">
+        <Table name="donde" schema="public">
+        </Table>
+        <Level name="Regi&#243;n" visible="true" column="region" type="Integer" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Estado" visible="true" column="estado" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Ciudad" visible="true" column="ciudad" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Muertes" column="muertes" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

@@ -1,0 +1,99 @@
+\input{preambuloSimple.tex}
+\usepackage{listings}
+\usepackage{dsfont}
+\usepackage{booktabs}
+%----------------------------------------------------------------------------------------
+%	TÍTULO Y DATOS DEL ALUMNO
+%----------------------------------------------------------------------------------------
+
+\title{	
+	\normalfont \normalsize 
+	\textsc{\textbf{Sistemas Multidimensionales} \\ Doble Grado en Ingeniería Informática y Matemáticas \\ Universidad de Granada} \\ [25pt] % Your university, school and/or department name(s)
+	\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+	\huge Situaciones Lentamente Cambiantes (SCD) \\ % The assignment title
+	\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+\author{Alberto Jesús Durán López} % Nombre y apellidos
+\date{\normalsize\today} % Incluye la fecha actual
+
+%----------------------------------------------------------------------------------------
+% DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	
+	\maketitle % Muestra el Título
+	
+	\newpage %inserta un salto de página
+	
+	%\tableofcontents % para generar el índice de contenidos
+	
+	% \listoffigures
+	
+	% \listoftables
+	
+	
+	
+	Hacemos referencia a SCD a las dimensiones cuyos valores de algunos atributos cambian lentamente, pero no con mucha frecuencia. Un ejemplo de SCD que hayamos tratado ha sido en la práctica 2, con el tamaño de los municipios.
+	Si los municipios cambian “lentamente” de habitantes, su nivel pasa a otro, modificándose el código de municipio. \\
+	
+	
+	
+	
+	Otro ejemplo puede ser el siguiente:  Tenemos un empleado que ha estado viviendo en Almería durante 5 años y, actualmente, reside en Granada. 
+	¿Qué hacemos? Realizamos una modificación en nuestra tabla (ALTER) y actualizamos el nuevo valor. (Paso 1)
+	
+	Ahora bien, imaginemos que en nuestra empresa queremos realizar un estudio de ventas de ordenadores por provincias. Los datos previos que teníamos del vendedor se contabilizaban desde años y, al sobreescribir su nueva ciudad de residencia, todas sus ventas han cambiado de provincia, cosa que se debería corregir pues hemos 'reescrito la historia'.
+	
+	Lo ideal sería que las ventas realizadas en Almería se quedasen asociadas a esa provincia y las nuevas ventas se asocien a la nueva provincia de Granada. (Paso 2)  \\
+	
+	Las soluciones que se proponen son las siguientes:
+	\begin{itemize}
+		\item \texttt{Reescribir los registros (Paso 1)}: Se realiza una modificación o, mejor dicho, un update de la tabla (ALTER). Un ejemplo válido sería el de actualización de campos como el número de teléfono o fecha de nacimiento.
+		\textbf{Efecto}: se reescribe la historia.
+		
+		\item \texttt{Crear nuevos registros (Paso 2)}: Se realiza cuando cambia un dato que nos interesa analizar y tomar decisiones en el futuro en función de su valor, luego queremos mantenerlo y, por ello, tenemos los hechos asociados a la versión vieja y a la nueva situación.
+		
+		\textbf{Desventaja}: Aumenta el nº de registros de las dimensiones. Podemos tener problemas cuando el problema no es lentamente cambiante (problema de desdoblamiento de dimensiones)
+		\textbf{Efecto}: No se reescribe la historia
+		
+		-\texttt{Tener versiones de registros}: Añadimos un registro pero con versiones.
+		
+		-\texttt{Tener registros enlazados, nuevo registro vinculado}: Se añade otro registro con la llave primaria y así poder olvidarme de las versiones. Lo único que requiere esto es que debe haber una relación entre los dos registros (por ejemplo, un identificador DNI). 
+		La clave es el uso de llaves generadas ya que nos simplifican todo, ocupan menos, y nos permiten conservar la historia si hay cambios.
+		
+		\item \texttt{Tener campos viejos y los actuales (Paso 3)}: Añadimos un nuevo campo, con la diferencia de que los hechos se asocian a unas 'relaciones' distintas de la dimensión.
+		Como consecuencia, tenemos 2 campos: actual y anterior.
+		Cerveza alhambra: pasa a bebidas alcohólicas y pasa a dieta mediterranea.
+		
+		
+		Este tipo se usa en situaciones muy especiales, su uso no es muy frecuente.
+		
+		
+		\item \texttt{Tipo 6 = 3+2+1} Se trata de una combinación de los 3 pasos anteriores. Se parte de un tipo 3, es decir, tenemos un registro con el campo anterior y el campo nuevo y se aplican los pasos 2 (reinterpretanto todo según lo actual, es decir, sobreescribiendo siempre el campo actual y manteniendo cómo se ha generado cada dato) y 1.
+		
+		Su uso tampoco es tan frecuente.
+		
+	\end{itemize}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\newpage
+	\begin{thebibliography}{X}
+		
+		\bibitem{1} \textsc{Apuntes de Clase}
+		
+	\end{thebibliography}
+	
+	
+\end{document}
+

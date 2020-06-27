@@ -1,0 +1,70 @@
+\input{preambuloSimple.tex}
+\usepackage{listings}
+\usepackage{dsfont}
+\usepackage{booktabs}
+%----------------------------------------------------------------------------------------
+%	TÍTULO Y DATOS DEL ALUMNO
+%----------------------------------------------------------------------------------------
+
+\title{	
+\normalfont \normalsize 
+\textsc{\textbf{Sistemas Multidimensionales} \\ Doble Grado en Ingeniería Informática y Matemáticas \\ Universidad de Granada} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Métodos de Extracción  \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+\author{Alberto Jesús Durán López} % Nombre y apellidos
+\date{\normalsize\today} % Incluye la fecha actual
+
+%----------------------------------------------------------------------------------------
+% DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Muestra el Título
+
+\newpage %inserta un salto de página
+
+%\tableofcontents % para generar el índice de contenidos
+
+% \listoffigures
+
+% \listoftables
+
+
+Definimos \textbf{ETL} como el proceso de extraer, transformar y cargar los datos. Nos centramos en la parte de extracción.
+
+\section{Tipos de métodos}
+\begin{itemize}
+	\item \texttt{Diferido:} Los métodos diferidos son aquellos en los que la actualización de información a partir de las fuentes de datos no se hace en tiempo real, es decir, no nos fijamos en la historia completa de los datos sino en un momento concreto.  Ejemplos de este método puede ser  ser la actualización de la liga de futbol (1 vez a la semana) o la actualización de la cartilla bancaria (cada vez que el usuario va al cajero).
+	
+	\item \texttt{Inmediato:} Se genera y refleja cualquier movimiento o modificación que se realice, como puede ser el número de personas conectadas a una base de datos (es importante contabilizar esto para que no hayan personas sospechosas intentando acceder de forma fraudulenta) o el número de asistentes a un concurrido concierto (para no sobrepasar el límite máximo y así evitar aglomeraciones)
+	A diferencia de los métodos diferidos, la ventaja de los métodos inmediatos es que la información intermedia sí se registra.
+
+\end{itemize}
+
+
+\section{Métodos de extracción}
+\begin{itemize}
+	\item \texttt{Comparación de imágenes:}Es un método \textbf{diferido} porque lo que pasa entre la toma de una foto y la posterior se pierde. Es decir, no tenemos los movimientos que ocurren entre medias) 
+	\item \texttt{Generados por las aplicaciones:} La aplicación que almacena los datos lleva y guarda los movimientos de lo que va ocurriendo. Por ello es un método \textbf{inmediato}. Desventaja: Las aplicaciones pueden quedar obsoletas. Si el usuario no tiene experiencia para \textit{actualizar} la aplicación tenemos un problema.
+	\item \texttt{Mediante disparadores:} En la asignatura DDSI realizamos pruebas con disparadores. Requiere que el SGBD permita su uso. Se define una acción a ejecutar cuando haya un cambio que esperamos. Se trata de un método \textbf{inmediato}.
+	\item \texttt{Huella de tiempo:} Necesitamos que esté grabada la fecha de la última modificación. Se usa un enfoque \textbf{diferido} ya que sólo se guarda la última modificación.
+	\item \texttt{Log file:} Método de extracción \textbf{inmediato} que hace uso de ficheros \textit{log} para almacenar todos los movimientos. Desventajas: Es posible que se almacene información prescindible para el SMD luego es necesario un filtrado de datos.
+\end{itemize}
+	
+
+En resumen, todos tienen sus ventajas e desventajas y no podríamos tomar uno de ellos como el mejor de todos ya que depende de las circunstancias del momento/sistema. Sin embargo, si nosotros mismos somos los desarrolladores de las aplicaciones, escogeríamos \texttt{Generados por las aplicaciones} como el mejor método de extracción ya que no tendríamos problema alguno en actualizar (si fuera necesario) la aplicación.
+
+
+\newpage
+\begin{thebibliography}{X}
+
+\bibitem{1} \textsc{Apuntes de Clase}
+
+\end{thebibliography}
+
+
+\end{document}
+

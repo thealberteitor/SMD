@@ -1,0 +1,2 @@
+Ambos archivos son el mismo. Uno de ellos lleva la extensión
+.backup (por si el otro da error al restaurarla en pgAdmin)
